@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    background-color: #efefef;
+}
+
+.white-container {
+    background-color: #fff;
+    margin: 24px auto;
+    border-radius: 2px;
+    border: 0;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, .12), 0 1px 6px 0 rgba(0, 0, 0, .12);
+    padding: 12px;
+}
+
+.top-margin1 {
+    margin-top: 6px;
+}
+
+.top-margin2 {
+    margin-top: 12px;
+}
+
+.top-margin3 {
+    margin-top: 18px;
+}
+
+.top-margin4 {
+    margin-top: 24px;
+}
+
+.bottom-margin1 {
+    margin-bottom: 6px;
+}
+
+.bottom-margin2 {
+    margin-bottom: 12px;
+}
+
+.bottom-margin3 {
+    margin-bottom: 18px;
+}
+
+.bottom-margin4 {
+    margin-bottom: 24px;
+}

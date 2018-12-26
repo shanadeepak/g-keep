@@ -1,0 +1,11 @@
+<div class="container white-container" (click)="elFocusAll()">
+    <div class="row">
+        <div class="col-12 bottom-margin2" *ngIf="showAll">
+            <input type="text" class="form-control" id="title" placeholder="Title">
+        </div>
+        <div class="col-12 bottom-margin2">
+            <textarea class="form-control" rows="2" id="comment" placeholder="Write a note"></textarea>
+        </div>
+        <div class="col-12 text-right" *ngIf="showAll"><button class="btn btn-primary">save</button></div>
+    </div>
+</div>

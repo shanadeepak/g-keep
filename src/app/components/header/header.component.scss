@@ -1,0 +1,43 @@
+.navbar-right {
+    .nav-item {
+        margin-left: 20px;
+    }
+}
+
+.dropdown-toggle {
+    &::after {
+        display: block;
+        border: 0px;
+    }
+}
+
+.dropdown {
+    .dropdown-menu {
+        &.show {
+            left: unset;
+            right: 0;
+            padding: .5rem .5rem;
+        }
+    }
+}
+
+.navbar {
+    color: #fff;
+    a {
+        color: #fff;
+        &:hover {
+            color: #ccc;
+        }
+    }
+    .dropdown-menu {
+        li {
+            text-align: center;
+            a {
+                color: #5b5950;
+                &:hover {
+                    color: #ddd;
+                }
+            }
+        }
+    }
+}

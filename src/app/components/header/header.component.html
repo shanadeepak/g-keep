@@ -1,0 +1,30 @@
+<div class="navbar navbar-default" [ngStyle]="{'background-color':bgColor}">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" [routerLink]="['/gkeep/notes']">G Keep </a>
+            <span class="navbar-brand"><i aria-hidden="true" class="fa fa-angle-right"></i>&nbsp;&nbsp;Notes</span>
+        </div>
+        <ul class="nav navbar-right">
+            <li class="nav nav-item">
+                <a href="javascript:void(0)">
+                    <!--<i class="fa fa-th"></i> -->
+                    <i class="fa fa-bars"></i>
+                </a>
+            </li>
+            <li class="nav nav-item dropdown">
+                <a class="dropdown-toggle" data-target="#" data-toggle="dropdown" (click)="toggleDropDown()">
+                    <i class="fas fa-ellipsis-v "></i>
+                </a>
+                <ul class="dropdown-menu" [ngClass]="{'show':toggleDropdownStat}">
+                    <li class="dropdown-header">Preferences</li>
+                    <li><a [routerLink]="['/gkeep/notes']" (click)="setSelectedRoute('notes')">My Notes</a></li>
+                    <li><a [routerLink]="['/gkeep/archive-notes']" (click)="setSelectedRoute('archive-notes')">Archive Notes</a></li>
+                    <li><a [routerLink]="['/gkeep/recycle-bin']" (click)="setSelectedRoute('recycle-bin')">Recycle Bin</a></li>
+                    <li class="dropdown-divider"></li>
+                    <li><a href="javascript:void(0)">Settings</a></li>
+                    <li><a href="/gkeep/about">About</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
