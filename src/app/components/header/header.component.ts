@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
     this.curPath = curPath;
     this.getColor();
   }
-  
   getColor() {
     switch (this.curPath) {
       case 'notes':
@@ -39,7 +38,7 @@ export class HeaderComponent implements OnInit {
         this.bgColor = 'blue';
       break;
     }
-  };
+  }
 
   toggleDropDown() {
     if (this.toggleDropdownStat) {

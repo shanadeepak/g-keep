@@ -4,6 +4,10 @@ export class Note {
     public status: String;
     public remind: String;
     public color: String;
+    public createdAt: String;
+    public updatedAt: String;
+    public _id: String;
+    public __v: String;
     constructor(title: String, description: String) {
       this.title = title;
       this.description = description;
