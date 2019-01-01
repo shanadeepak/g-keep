@@ -12,7 +12,14 @@ import { RecycleComponent } from './components/recycle/recycle.component';
 import { NotesListComponent } from './components/notes/notes-list/notes-list.component';
 import { NotesApiService } from './services/notes-api.service';
 import { StatusFilterPipe } from './pipes/status-filter.pipe';
-
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './store/reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { NotesActions } from './store/actions/notes.actions';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { PopoverModule } from 'ngx-popover';
 
 @NgModule({
   declarations: [
@@ -28,9 +35,15 @@ import { StatusFilterPipe } from './pipes/status-filter.pipe';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    PopoverModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [NotesApiService],
+  providers: [NotesApiService, NotesActions],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

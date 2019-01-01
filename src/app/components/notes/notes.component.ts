@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Note } from '../../note.model';
+import { Note } from '../../model/note.model';
 import { NotesApiService } from '../../services/notes-api.service';
+
 
 @Component({
   selector: 'app-notes',
@@ -14,7 +15,9 @@ export class NotesComponent implements OnInit {
   public notesForm: FormGroup;
   public submitted = false;
   public Notes: Note[];
-  constructor(private formBuilder: FormBuilder, private api: NotesApiService) { }
+  constructor(private formBuilder: FormBuilder, private store: Store<any>, private api: NotesApiService) {
+  }
+
 
   private atleastOneRequired() {
     return (notesForm: FormGroup) => {
@@ -39,12 +42,11 @@ export class NotesComponent implements OnInit {
       validator: this.atleastOneRequired()
     });
 
-    this.api.getNotes()
-    .subscribe(res => {
-      this.Notes = res;
-      console.log(this.Notes);
-    }, err => {
-      console.log(err);
+    this.api.getAllNotes();
+
+    this.store.select('notes').subscribe(data => {
+      console.log(data);
+      this.Notes =  data.notes;
     });
   }
 
@@ -62,7 +64,7 @@ export class NotesComponent implements OnInit {
     this.Notes.push(myNote);
     this.api.addNote(myNote)
     .subscribe(res => {
-        let id = res['_id'];
+        this.api.getAllNotes();
       }, (err) => {
         console.log(err);
       });

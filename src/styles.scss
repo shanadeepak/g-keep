@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "~ng-pick-datetime/assets/style/picker.min.css";
 body {
     background-color: #efefef;
 }
@@ -47,4 +48,14 @@ body {
 
 .container-12 {
     margin: auto;
+}
+
+popover-content {
+    .popover {
+        padding: 12px !important;
+        z-index: 900;
+        .remind-section {
+            padding: 12px;
+        }
+    }
 }

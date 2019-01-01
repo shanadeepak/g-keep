@@ -133,5 +133,8 @@
             }
         }
     },
-    "defaultProject": "g-keep"
+    "defaultProject": "g-keep",
+    "cli": {
+        "defaultCollection": "@ngrx/schematics"
+    }
 }

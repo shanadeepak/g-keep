@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Note } from '../../note.model';
+import { Store } from '@ngrx/store';
+import { Note } from '../../model/note.model';
 import { NotesApiService } from '../../services/notes-api.service';
 
 @Component({
@@ -9,15 +10,14 @@ import { NotesApiService } from '../../services/notes-api.service';
 })
 export class ArchiveComponent implements OnInit {
   public Notes: Note[];
-  constructor(private api: NotesApiService) { }
+  constructor(private store: Store<any>, private api: NotesApiService) { }
 
   ngOnInit() {
-    this.api.getNotes()
-    .subscribe(res => {
-      this.Notes = res;
-      console.log(this.Notes);
-    }, err => {
-      console.log(err);
+    this.api.getAllNotes();
+
+    this.store.select('notes').subscribe(data => {
+      console.log(data);
+      this.Notes =  data.notes;
     });
   }
 

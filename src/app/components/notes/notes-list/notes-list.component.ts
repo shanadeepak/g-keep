@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Note } from '../../../note.model';
+import { FormsModule } from '@angular/forms';
+import { Note } from '../../../model/note.model';
 
 import { NotesApiService } from '../../../services/notes-api.service';
 
@@ -19,8 +20,7 @@ export class NotesListComponent implements OnInit {
     note.status = 'Archive';
     this.api.updateNote(note._id, note)
     .subscribe(res => {
-        //let id = res['_id'];
-        console.log(res);
+        this.api.getAllNotes();
       }, (err) => {
         console.log(err);
       });
@@ -30,8 +30,25 @@ export class NotesListComponent implements OnInit {
     note.status = 'Active';
     this.api.updateNote(note._id, note)
     .subscribe(res => {
-        //let id = res['_id'];
-        console.log(res);
+        this.api.getAllNotes();
+      }, (err) => {
+        console.log(err);
+      });
+  }
+  setColor(color, note) {
+    note.color = color;
+    this.api.updateNote(note._id, note)
+    .subscribe(res => {
+        this.api.getAllNotes();
+      }, (err) => {
+        console.log(err);
+      });
+  }
+  setRemind(note, noteRemind) {
+    note.remind = noteRemind.value;
+    this.api.updateNote(note._id, note)
+    .subscribe(res => {
+        this.api.getAllNotes();
       }, (err) => {
         console.log(err);
       });
@@ -41,8 +58,16 @@ export class NotesListComponent implements OnInit {
     note.status = 'Deleted';
     this.api.updateNote(note._id, note)
     .subscribe(res => {
-        //let id = res['_id'];
-        console.log(res);
+        this.api.getAllNotes();
+      }, (err) => {
+        console.log(err);
+      });
+  }
+
+  deleteForEver(note) {
+    this.api.deleteNote(note._id)
+    .subscribe(res => {
+        this.api.getAllNotes();
       }, (err) => {
         console.log(err);
       });

@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map } from 'rxjs/operators';
-import { Note } from '../note.model';
+import { Note } from '../model/note.model';
+import { NotesActions } from '../store/actions/notes.actions';
+
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
@@ -12,7 +15,9 @@ const apiUrl = 'http://localhost:3000/notes/';
 })
 export class NotesApiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private store: Store<any>, private notesAction: NotesActions) {
+    this.notesAction = new NotesActions();
+   }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -30,6 +35,18 @@ export class NotesApiService {
         catchError(this.handleError('getNotes', []))
       );
   }
+
+  getAllNotes () {
+    this.getNotes()
+    .subscribe(res => {
+      const notes: Note[] = res;
+      this.store.dispatch(this.notesAction.LoadNotes(notes));
+      console.log(notes);
+    }, err => {
+      console.log(err);
+    });
+  }
+
   getNote(id: number): Observable<Note> {
     const url = apiUrl + id;
     return this.http.get<Note>(url).pipe(

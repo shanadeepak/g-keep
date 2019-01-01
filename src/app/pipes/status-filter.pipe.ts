@@ -1,5 +1,5 @@
 import { Injectable, Pipe, PipeTransform } from '@angular/core';
-import { Note } from '../note.model';
+import { Note } from '../model/note.model';
 
 @Pipe({
  name: 'statusfilter'
