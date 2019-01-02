@@ -1,7 +1,8 @@
 <div class="container white-container" [ngStyle]="{'background-color': myNote.color ? myNote.color : '#ffffff'}">
-    <p><b>{{myNote.title}}</b></p>
-    <p>{{myNote.description}}</p>
-
+    <div class="note-contents" (click)="openModal(myNote);">
+        <p><b>{{myNote.title}}</b></p>
+        <p>{{myNote.description}}</p>
+    </div>
     <div class="row note-actions" *ngIf="myNote.status !== 'Deleted'" [ngStyle]="{'color': myNote.color ? myNote.color : '#ffffff'}">
 
         <div class="col-3">
@@ -76,3 +77,17 @@
         </div>
     </div>
 </popover-content>
+<ngx-smart-modal #noteEditModal{{myNote._id}} identifier="noteEditModal{{myNote._id}}">
+    <div class="row mod-content">
+        <div class="col-12 bottom-margin2">
+            <input type="text" class="form-control" name="title" id="title" placeholder="Title" [(ngModel)]="myNote.title">
+        </div>
+        <div class="col-12 bottom-margin3">
+            <textarea class="form-control" rows="5" name="description" id="description" placeholder="Write a note" [(ngModel)]="myNote.description"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 text-left"><button class="btn btn-light" (click)="closeModal(myNote._id)">Close</button></div>
+        <div class="col-6 text-right"><button class="btn btn-primary" (click)="editNote(myNote)">save</button></div>
+    </div>
+</ngx-smart-modal>

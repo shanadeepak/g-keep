@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
   setSelectedRoute(curPath: String) {
     this.curPath = curPath;
     this.getColor();
+    this.toggleDropDown();
   }
   getColor() {
     switch (this.curPath) {

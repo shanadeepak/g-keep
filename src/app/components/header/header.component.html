@@ -5,7 +5,7 @@
             <span class="navbar-brand"><i aria-hidden="true" class="fa fa-angle-right"></i>&nbsp;&nbsp;Notes</span>
         </div>
         <ul class="nav navbar-right">
-            <li class="nav nav-item">
+            <li class="nav nav-item hidden-xs">
                 <a href="javascript:void(0)">
                     <!--<i class="fa fa-th"></i> -->
                     <i class="fa fa-bars"></i>
@@ -17,12 +17,12 @@
                 </a>
                 <ul class="dropdown-menu" [ngClass]="{'show':toggleDropdownStat}">
                     <li class="dropdown-header">Preferences</li>
-                    <li><a [routerLink]="['/gkeep/notes']" (click)="setSelectedRoute('notes')">My Notes</a></li>
-                    <li><a [routerLink]="['/gkeep/archive-notes']" (click)="setSelectedRoute('archive-notes')">Archive Notes</a></li>
-                    <li><a [routerLink]="['/gkeep/recycle-bin']" (click)="setSelectedRoute('recycle-bin')">Recycle Bin</a></li>
+                    <li><a [routerLink]="['/gkeep/notes']" (click)="setSelectedRoute('notes')" data-toggle="dropdown">My Notes</a></li>
+                    <li><a [routerLink]="['/gkeep/archive-notes']" (click)="setSelectedRoute('archive-notes')" data-toggle="dropdown">Archive Notes</a></li>
+                    <li><a [routerLink]="['/gkeep/recycle-bin']" (click)="setSelectedRoute('recycle-bin')" data-toggle="dropdown">Recycle Bin</a></li>
                     <li class="dropdown-divider"></li>
-                    <li><a href="javascript:void(0)">Settings</a></li>
-                    <li><a href="/gkeep/about">About</a></li>
+                    <li><a href="javascript:void(0)" data-toggle="dropdown">Settings</a></li>
+                    <li><a href="/gkeep/about" data-toggle="dropdown">About</a></li>
                 </ul>
             </li>
         </ul>

@@ -1,6 +1,14 @@
+.white-container {
+    padding: 0px;
+    .note-contents {
+        padding: 12px;
+    }
+}
+
 .note-actions {
     margin: auto;
     text-align: center;
+    padding: 12px;
     &:hover {
         a {
             color: #333;
@@ -37,4 +45,8 @@
     &.white {
         background-color: #fff;
     }
+}
+
+.mod-content {
+    margin: 36px 0px 0px;
 }

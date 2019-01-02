@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Note } from '../../../model/note.model';
-
+import { NgxSmartModalService } from 'ngx-smart-modal';
 import { NotesApiService } from '../../../services/notes-api.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { NotesApiService } from '../../../services/notes-api.service';
 })
 export class NotesListComponent implements OnInit {
   @Input() myNote: Note;
-  constructor(private api: NotesApiService) { }
+  constructor(private api: NotesApiService, public ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {
   }
@@ -71,6 +71,31 @@ export class NotesListComponent implements OnInit {
       }, (err) => {
         console.log(err);
       });
+  }
+
+  openModal(note) {
+    if ( note.status !== 'Deleted' ) {
+      this.ngxSmartModalService.getModal('noteEditModal' + note._id).open();
+    }
+  }
+
+  editNote(note) {
+    if ( note.title === ''  && note.description === '') {
+       //do not close modal
+       this.api.getAllNotes();
+    } else {
+      this.api.updateNote(note._id, note)
+    .subscribe(res => {
+        this.api.getAllNotes();
+        this.closeModal(note._id);
+      }, (err) => {
+        console.log(err);
+      });
+    }
+  }
+  closeModal(id) {
+    this.api.getAllNotes();
+    this.ngxSmartModalService.getModal('noteEditModal' + id).close();
   }
 
 }
