@@ -6,15 +6,27 @@ export class NotesAction implements Action {
     payload: Note[];
 }
 
+export class GridTypeAction implements Action {
+    type: string;
+    payload: string;
+}
+
 @Injectable()
 export class NotesActions {
     static LOAD_NOTES = 'LOAD_NEWS';
-    static FILTER_STATUS = 'FILTER_STATUS';
+    static LOAD_GRID_TYPE = 'LOAD_GRID_TYPE';
 
     LoadNotes(list: Note[]): NotesAction {
         return {
             type: NotesActions.LOAD_NOTES,
             payload: list
+        };
+    }
+
+    LoadGridType(gridType: string): GridTypeAction {
+        return {
+            type: NotesActions.LOAD_GRID_TYPE,
+            payload: gridType
         };
     }
 }

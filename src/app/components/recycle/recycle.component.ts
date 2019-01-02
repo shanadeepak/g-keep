@@ -9,7 +9,9 @@ import { NotesApiService } from '../../services/notes-api.service';
 })
 export class RecycleComponent implements OnInit {
   public Notes: Note[];
-  constructor(private store: Store<any>, private api: NotesApiService) { }
+  public gridType: String;
+  constructor(private store: Store<any>, private api: NotesApiService) {
+  }
 
   ngOnInit() {
     this.api.getAllNotes();
@@ -17,6 +19,9 @@ export class RecycleComponent implements OnInit {
     this.store.select('notes').subscribe(data => {
       console.log(data);
       this.Notes =  data.notes;
+    });
+    this.store.select('listView').subscribe(data => {
+      this.gridType =  data.gridType;
     });
   }
 

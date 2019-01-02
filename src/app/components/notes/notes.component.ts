@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Note } from '../../model/note.model';
 import { NotesApiService } from '../../services/notes-api.service';
 
-
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
@@ -15,6 +14,7 @@ export class NotesComponent implements OnInit {
   public notesForm: FormGroup;
   public submitted = false;
   public Notes: Note[];
+  public gridType: String;
   constructor(private formBuilder: FormBuilder, private store: Store<any>, private api: NotesApiService) {
   }
 
@@ -45,8 +45,11 @@ export class NotesComponent implements OnInit {
     this.api.getAllNotes();
 
     this.store.select('notes').subscribe(data => {
-      console.log(data);
       this.Notes =  data.notes;
+    });
+
+    this.store.select('listView').subscribe(data => {
+      this.gridType =  data.gridType;
     });
   }
 
@@ -68,7 +71,7 @@ export class NotesComponent implements OnInit {
       }, (err) => {
         console.log(err);
       });
-    console.log(this.Notes);
     this.notesForm.reset();
+    this.showAll = false;
   }
 }

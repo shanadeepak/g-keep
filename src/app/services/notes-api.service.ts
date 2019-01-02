@@ -41,7 +41,6 @@ export class NotesApiService {
     .subscribe(res => {
       const notes: Note[] = res;
       this.store.dispatch(this.notesAction.LoadNotes(notes));
-      console.log(notes);
     }, err => {
       console.log(err);
     });

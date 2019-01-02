@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Note } from '../../../model/note.model';
 import { NgxSmartModalService } from 'ngx-smart-modal';
+
 import { NotesApiService } from '../../../services/notes-api.service';
 
 @Component({

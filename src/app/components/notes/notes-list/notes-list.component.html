@@ -4,7 +4,6 @@
         <p>{{myNote.description}}</p>
     </div>
     <div class="row note-actions" *ngIf="myNote.status !== 'Deleted'" [ngStyle]="{'color': myNote.color ? myNote.color : '#ffffff'}">
-
         <div class="col-3">
             <a [popover]="remindPopover" popoverPlacement="right"><i class="fa fa-bell" aria-hidden="true"></i> <span class="sr-only">remind</span></a>
         </div>
@@ -22,12 +21,12 @@
             <a (click)="deleteNote(myNote)"><i class="fa fa-recycle" aria-hidden="true"></i> <span class="sr-only">recycle</span></a>
         </div>
     </div>
-    <div class="row note-actions" *ngIf="myNote.status === 'Deleted'">
-        <div class="col-3">
-            <a (click)="deleteForEver(myNote)"><i class="fa fa-times" aria-hidden="true"></i><span class="sr-only">colors</span></a>
-        </div>
+    <div class="row note-actions" *ngIf="myNote.status === 'Deleted'" [ngStyle]="{'color': myNote.color ? myNote.color : '#ffffff'}">
         <div class="col-3">
             <a (click)="makeActive(myNote)"><i class="fa fa-recycle" aria-hidden="true"></i> <span class="sr-only">recycle</span></a>
+        </div>
+        <div class="col-3">
+            <a (click)="deleteForEver(myNote)"><i class="fa fa-times" aria-hidden="true"></i><span class="sr-only">colors</span></a>
         </div>
     </div>
 </div>
