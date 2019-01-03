@@ -6,6 +6,7 @@ export class Note {
     public color: String;
     public createdAt: String;
     public updatedAt: String;
+    public orderIndex: Number;
     public _id: String;
     public __v: String;
     constructor(title: String, description: String) {
@@ -14,5 +15,6 @@ export class Note {
       this.status = 'Active';
       this.remind = '';
       this.color = '';
+      this.orderIndex = 9999;
     }
 }

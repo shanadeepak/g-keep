@@ -1,32 +1,61 @@
 <div class="container white-container" [ngStyle]="{'background-color': myNote.color ? myNote.color : '#ffffff'}">
-    <div class="note-contents" (click)="openModal(myNote);">
+    <div class="note-contents">
         <p><b>{{myNote.title}}</b></p>
         <p>{{myNote.description}}</p>
     </div>
     <div class="row note-actions" *ngIf="myNote.status !== 'Deleted'" [ngStyle]="{'color': myNote.color ? myNote.color : '#ffffff'}">
-        <div class="col-3">
-            <a [popover]="remindPopover" popoverPlacement="right"><i class="fa fa-bell" aria-hidden="true"></i> <span class="sr-only">remind</span></a>
-        </div>
-        <div class="col-3" *ngIf="myNote.status === 'Active'">
-            <a (click)="archive(myNote)"><i class="fa fa-download" aria-hidden="true"></i> <span class="sr-only">archive</span></a>
-        </div>
-
-        <div class="col-3" *ngIf="myNote.status === 'Archive'">
-            <a (click)="makeActive(myNote)"><i class="fa fa-download" aria-hidden="true"></i><span class="sr-only">colors</span></a>
-        </div>
-        <div class="col-3">
-            <a [popover]="colorPopover" popoverPlacement="right"><i class="fa fa-paint-brush" aria-hidden="true"></i><span class="sr-only">colors</span></a>
-        </div>
-        <div class="col-3">
-            <a (click)="deleteNote(myNote)"><i class="fa fa-recycle" aria-hidden="true"></i> <span class="sr-only">recycle</span></a>
+        <div class="col-12">
+            <div class="note-link">
+                <a (click)="openModal(myNote);">
+                    <i class="fa fa-edit"></i>
+                    <span class="sr-only">Edit Note</span>
+                </a>
+            </div>
+            <div class="note-link">
+                <a [popover]="remindPopover" popoverPlacement="right">
+                    <i class="fa fa-bell" aria-hidden="true"></i> <span class="sr-only">Set remider</span>
+                </a>
+            </div>
+            <div class="note-link" *ngIf="myNote.status === 'Active'">
+                <a (click)="archive(myNote)">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                    <span class="sr-only">archive</span>
+                </a>
+            </div>
+            <div class="note-link" *ngIf="myNote.status === 'Archive'">
+                <a (click)="makeActive(myNote)">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                    <span class="sr-only">un archive</span>
+                </a>
+            </div>
+            <div class="note-link">
+                <a [popover]="colorPopover" popoverPlacement="right">
+                    <i class="fa fa-paint-brush" aria-hidden="true"></i>
+                    <span class="sr-only">set colours</span>
+                </a>
+            </div>
+            <div class="note-link">
+                <a (click)="deleteNote(myNote)">
+                    <i class="fa fa-recycle" aria-hidden="true"></i>
+                    <span class="sr-only">delete note</span>
+                </a>
+            </div>
         </div>
     </div>
     <div class="row note-actions" *ngIf="myNote.status === 'Deleted'" [ngStyle]="{'color': myNote.color ? myNote.color : '#ffffff'}">
-        <div class="col-3">
-            <a (click)="makeActive(myNote)"><i class="fa fa-recycle" aria-hidden="true"></i> <span class="sr-only">recycle</span></a>
-        </div>
-        <div class="col-3">
-            <a (click)="deleteForEver(myNote)"><i class="fa fa-times" aria-hidden="true"></i><span class="sr-only">colors</span></a>
+        <div class="col-12">
+            <div class="note-link">
+                <a (click)="makeActive(myNote)">
+                    <i class="fa fa-recycle" aria-hidden="true"></i>
+                    <span class="sr-only">recycle</span>
+                </a>
+            </div>
+            <div class="note-link">
+                <a (click)="deleteForEver(myNote)">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <span class="sr-only">colors</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>

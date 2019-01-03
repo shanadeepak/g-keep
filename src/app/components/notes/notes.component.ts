@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Note } from '../../model/note.model';
 import { NotesApiService } from '../../services/notes-api.service';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { StatusFilterPipe } from '../../pipes/status-filter.pipe';
+import { OrderPipe } from 'ngx-order-pipe';
 
 @Component({
   selector: 'app-notes',
@@ -14,8 +17,12 @@ export class NotesComponent implements OnInit {
   public notesForm: FormGroup;
   public submitted = false;
   public Notes: Note[];
+  public activeNotes: Note[];
   public gridType: String;
-  constructor(private formBuilder: FormBuilder, private store: Store<any>, private api: NotesApiService) {
+  private statusFilter: StatusFilterPipe;
+  public order: String = 'orderIndex';
+  constructor(private formBuilder: FormBuilder, private store: Store<any>, private api: NotesApiService, private orderPipe: OrderPipe) {
+    this.statusFilter = new StatusFilterPipe();
   }
 
 
@@ -46,6 +53,8 @@ export class NotesComponent implements OnInit {
 
     this.store.select('notes').subscribe(data => {
       this.Notes =  data.notes;
+      this.activeNotes = this.statusFilter.transform(this.Notes, 'status', 'Active');
+      this.activeNotes = this.orderPipe.transform(this.activeNotes, this.order);
     });
 
     this.store.select('listView').subscribe(data => {
@@ -53,10 +62,32 @@ export class NotesComponent implements OnInit {
     });
   }
 
+  dropEvent(event: CdkDragDrop<Note[]>) {
+    console.log(event.previousIndex,  event.currentIndex);
+    moveItemInArray(this.activeNotes, event.previousIndex, event.currentIndex);
+    this.updateNoteIndex(this.activeNotes);
+  }
+
+  updateNoteIndex(notes) {
+    let index = 0;
+    notes.forEach( noteItem => {
+      noteItem.orderIndex = index;
+      this.api.updateNote(noteItem._id, noteItem)
+      .subscribe(res => {
+        this.api.getAllNotes();
+      }, (err) => {
+        console.log(err);
+      });
+      index++;
+    });
+    this.api.getAllNotes();
+  }
   elFocusAll() {
     this.showAll = true;
   }
-
+  listSorted($event) {
+    console.log($event);
+  }
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid

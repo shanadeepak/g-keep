@@ -7,8 +7,8 @@
         <ul class="nav navbar-right">
             <li class="nav nav-item d-none d-sm-block">
                 <a (click)="changeGridType()">
-                    <!--<i class="fa fa-th"></i> -->
-                    <i class="fa fa-bars"></i>
+                    <i class="fa fa-th" aria-hidden="true" *ngIf="gridType == 'full'"></i>
+                    <i class="fa fa-bars" *ngIf="gridType == 'grid'"></i>
                 </a>
             </li>
             <li class="nav nav-item dropdown">
@@ -21,8 +21,8 @@
                     <li><a [routerLink]="['/gkeep/archive-notes']" (click)="setSelectedRoute('archive-notes')" data-toggle="dropdown">Archive Notes</a></li>
                     <li><a [routerLink]="['/gkeep/recycle-bin']" (click)="setSelectedRoute('recycle-bin')" data-toggle="dropdown">Recycle Bin</a></li>
                     <li class="dropdown-divider"></li>
-                    <li><a href="javascript:void(0)" data-toggle="dropdown">Settings</a></li>
-                    <li><a href="/gkeep/about" data-toggle="dropdown">About</a></li>
+                    <li><a [routerLink]="['/gkeep/settings']" data-toggle="dropdown">Settings</a></li>
+                    <li><a [routerLink]="['/gkeep/about']" data-toggle="dropdown">About</a></li>
                 </ul>
             </li>
         </ul>

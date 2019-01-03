@@ -11,8 +11,14 @@
         </div>
     </form>
 </div>
-<div class="row container-12">
-    <div class="col-xs-12" [ngClass]="{ 'col-sm-3' : gridType === 'grid' ,  'col-sm-12' : gridType === 'full' }" *ngFor="let note of Notes | statusfilter: 'status' : 'Active'">
+<div class="row container-12 cdkDragBoundary cdk-drop-list" (cdkDropListDropped)="dropEvent($event)" cdkDropList *ngIf="gridType === 'full'">
+    <div cdkDrag class="col-12" *ngFor="let note of activeNotes">
+        <app-notes-list [myNote]="note"></app-notes-list>
+    </div>
+</div>
+
+<div class="row container-12 cdkDragBoundary cdk-drop-list" (cdkDropListDropped)="dropEvent($event)" cdkDropList *ngIf="gridType === 'grid'">
+    <div cdkDrag class="col-xs-12 col-sm-3" *ngFor="let note of activeNotes index as i">
         <app-notes-list [myNote]="note"></app-notes-list>
     </div>
 </div>

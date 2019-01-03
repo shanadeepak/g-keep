@@ -20,6 +20,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { PopoverModule } from 'ngx-popover';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { OrderModule } from 'ngx-order-pipe';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
     ArchiveComponent,
     RecycleComponent,
     NotesListComponent,
-    StatusFilterPipe
+    StatusFilterPipe,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +45,8 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
     PopoverModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
+    DragDropModule,
+    OrderModule,
     NgxSmartModalModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : []

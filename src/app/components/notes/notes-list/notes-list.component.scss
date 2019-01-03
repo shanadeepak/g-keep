@@ -7,8 +7,12 @@
 
 .note-actions {
     margin: auto;
-    text-align: center;
+    text-align: left;
     padding: 12px;
+    .note-link {
+        display: inline;
+        margin: 0px 12px;
+    }
     &:hover {
         a {
             color: #333;
