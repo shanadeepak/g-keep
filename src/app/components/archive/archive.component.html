@@ -1,5 +1,5 @@
 <div class="row container-12">
-    <div class="col-xs-12" [ngClass]="{ 'col-sm-3' : gridType === 'grid' ,  'col-sm-12' : gridType === 'full' }" *ngFor="let note of Notes | statusfilter: 'status' : 'Archive'">
+    <div class="col-xs-12" [ngClass]="{ 'col-sm-3' : gridType === 'grid' ,  'col-sm-12' : gridType === 'full' }" *ngFor="let note of allNotes | statusfilter: 'status' : 'Archive'">
         <app-notes-list [myNote]="note"></app-notes-list>
     </div>
 </div>

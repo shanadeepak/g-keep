@@ -9,7 +9,7 @@ import { NotesApiService } from '../../services/notes-api.service';
   styleUrls: ['./archive.component.scss']
 })
 export class ArchiveComponent implements OnInit {
-  public Notes: Note[];
+  public allNotes: Note[];
   public gridType: String;
   constructor(private store: Store<any>, private api: NotesApiService) { }
 
@@ -18,7 +18,7 @@ export class ArchiveComponent implements OnInit {
 
     this.store.select('notes').subscribe(data => {
       console.log(data);
-      this.Notes =  data.notes;
+      this.allNotes =  data.notes;
     });
     this.store.select('listView').subscribe(data => {
       this.gridType =  data.gridType;

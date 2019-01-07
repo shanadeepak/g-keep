@@ -1,20 +1,28 @@
-export class Note {
-    public title: String;
-    public description: String;
-    public status: String;
-    public remind: String;
-    public color: String;
-    public createdAt: String;
-    public updatedAt: String;
-    public orderIndex: Number;
-    public _id: String;
-    public __v: String;
-    constructor(title: String, description: String) {
-      this.title = title;
-      this.description = description;
-      this.status = 'Active';
-      this.remind = '';
-      this.color = '';
-      this.orderIndex = 9999;
-    }
+export interface Note {
+    title: String;
+    description: String;
+    orderIndex: Number;
+    status: String;
+    remind: String;
+    color: String;
+    createdAt: String;
+    updatedAt: String;
+    _id: String;
+    __v: String;
+}
+
+export function createNote(title: String, description: String): Note {
+    const newNote = {
+      title: title,
+      description: description,
+      orderIndex: 9999,
+      status: 'Active',
+      remind: '',
+      color: '',
+      createdAt: '',
+      updatedAt: '',
+      _id: '',
+      __v: ''
+    };
+    return newNote;
 }

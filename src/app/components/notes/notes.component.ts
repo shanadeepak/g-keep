@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Note } from '../../model/note.model';
+import { Note, createNote } from '../../model/note.model';
 import { NotesApiService } from '../../services/notes-api.service';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { StatusFilterPipe } from '../../pipes/status-filter.pipe';
@@ -16,7 +16,7 @@ export class NotesComponent implements OnInit {
   public showAll = false;
   public notesForm: FormGroup;
   public submitted = false;
-  public Notes: Note[];
+  public allNotes: Note[];
   public activeNotes: Note[];
   public gridType: String;
   private statusFilter: StatusFilterPipe;
@@ -41,7 +41,7 @@ export class NotesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.Notes = [];
+    this.allNotes = [];
     this.notesForm = this.formBuilder.group({
       title: '',
       description: '',
@@ -52,8 +52,8 @@ export class NotesComponent implements OnInit {
     this.api.getAllNotes();
 
     this.store.select('notes').subscribe(data => {
-      this.Notes =  data.notes;
-      this.activeNotes = this.statusFilter.transform(this.Notes, 'status', 'Active');
+      this.allNotes =  data.notes;
+      this.activeNotes = this.statusFilter.transform(this.allNotes, 'status', 'Active');
       this.activeNotes = this.orderPipe.transform(this.activeNotes, this.order);
     });
 
@@ -94,8 +94,8 @@ export class NotesComponent implements OnInit {
     if (this.notesForm.invalid) {
         return;
     }
-    const myNote = new Note(this.notesForm.value.title, this.notesForm.value.description);
-    this.Notes.push(myNote);
+    const myNote = createNote(this.notesForm.value.title, this.notesForm.value.description);
+    this.allNotes.push(myNote);
     this.api.addNote(myNote)
     .subscribe(res => {
         this.api.getAllNotes();
