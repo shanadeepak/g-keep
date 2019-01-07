@@ -82,7 +82,7 @@ export class NotesListComponent implements OnInit {
 
   editNote(note) {
     if ( note.title === ''  && note.description === '') {
-       //do not close modal
+       // do not close modal
        this.api.getAllNotes();
     } else {
       this.api.updateNote(note._id, note)

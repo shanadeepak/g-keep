@@ -1,4 +1,4 @@
-<div class="container white-container" [ngStyle]="{'background-color': myNote.color ? myNote.color : '#ffffff'}">
+<div class="container white-container" [ngStyle]="{'background-color': myNote.color ? myNote.color : '#ffffff'}" *ngIf="myNote !== undefined">
     <div class="note-contents">
         <p><b>{{myNote.title}}</b></p>
         <p>{{myNote.description}}</p>
@@ -105,7 +105,7 @@
         </div>
     </div>
 </popover-content>
-<ngx-smart-modal #noteEditModal{{myNote._id}} identifier="noteEditModal{{myNote._id}}">
+<ngx-smart-modal #noteEditModal{{myNote._id}} identifier="noteEditModal{{myNote._id}}" *ngIf="myNote !== undefined">
     <div class="row mod-content">
         <div class="col-12 bottom-margin2">
             <input type="text" class="form-control" name="title" id="title" placeholder="Title" [(ngModel)]="myNote.title">
