@@ -11,7 +11,7 @@ export const initialState: NotesState = {
 
 export function reducer(state = initialState, action: NotesAction): NotesState {
   switch (action.type) {
-    case 'LOAD_NEWS':
+    case 'LOAD_NOTES':
       const newNotes: NotesState = {
         notes: action.payload
       };

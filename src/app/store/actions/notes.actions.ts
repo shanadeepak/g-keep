@@ -13,7 +13,7 @@ export class GridTypeAction implements Action {
 
 @Injectable()
 export class NotesActions {
-    static LOAD_NOTES = 'LOAD_NEWS';
+    static LOAD_NOTES = 'LOAD_NOTES';
     static LOAD_GRID_TYPE = 'LOAD_GRID_TYPE';
 
     LoadNotes(list: Note[]): NotesAction {
